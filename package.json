@@ -14,7 +14,9 @@
     "url": "git+https://github.com/syleront/node-shikimori-api.git"
   },
   "keywords": [
-    "shikimori"
+    "shikimori",
+    "wrapper",
+    "api"
   ],
   "author": "Syleront",
   "license": "ISC",
