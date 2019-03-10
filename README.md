@@ -16,7 +16,7 @@ yarn add node-shikimori-api
 const Shikimori = require("node-shikimori-api");
 const shiki = new Shikimori();
 
-shiki.users({ // request to https://shikimori.org/api/users/Syleront
+shiki.api.users({ // request to https://shikimori.org/api/users/Syleront
   user_id: "Syleront"
 }).then((res) => {
   // some code
@@ -32,7 +32,7 @@ shiki.auth.login({
   nickname: "zerotwo",
   password: "qwerty123"
 }).then(() => {
-  shiki.users({
+  shiki.api.users({
     section: "whoami"
   }).then((res) => {
     // returns logged user info
@@ -48,7 +48,7 @@ How to get them? e.g. if you wanna to get ../users/zerotwo/history
 You must to do this next:
 
 ``` js
-shiki.users({
+shiki.api.users({
   section: "history",
   user_id: "zerotwo" // You can also use anime_id instead of user_id
 }).then((res) => {
@@ -60,7 +60,7 @@ Also, if method must be a POST instead of GET (e.g. messages for send message)
 You should set "method" parameter:
 
 ```js
-shiki.messages({
+shiki.api.messages({
   method: "post",
   message: { // parameters for post request
     body: "Hello!",
