@@ -1,6 +1,6 @@
 {
   "name": "node-shikimori-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Easy to use wrapper for shikimori api",
   "main": "index.js",
   "directories": {
@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/syleront/node-shikimori-api#readme",
   "dependencies": {
-    "node-fetch": "^2.3.0"
+    "needle": "^2.2.4"
   }
 }
