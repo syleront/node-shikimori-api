@@ -1,13 +1,10 @@
 {
   "name": "node-shikimori-api",
-  "version": "0.2.1-rc.1",
-  "description": "Easy to use wrapper for shikimori api",
-  "main": "index.js",
+  "version": "0.3.0",
+  "description": "Lightweight and easy to use wrapper for shikimori api",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

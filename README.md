@@ -44,8 +44,8 @@ shiki.auth.login({
 ```
 
 ### Address paths
-Shikimori users some parameters in url paths (e.g. user id)
-How to get them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)
+Shikimori users some parameters in url paths (e.g. user id)<br>
+How to get them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)<br>
 You must to do this next:
 
 ``` js
@@ -57,7 +57,7 @@ shiki.api.users({
 });
 ```
 
-Also, if method must be a POST instead of GET (e.g. messages for send message)
+Also, if method must be a POST instead of GET (e.g. messages for send message)<br>
 You should set "method" parameter:
 
 ```js
@@ -77,3 +77,12 @@ shiki.api.messages({
 Parameters for request is merged with wrapper parameters <br>
 In deep, he's get next parameters if exists: **method**, **user_id**, **anime_id** <br>
 And removes it from request parameters
+
+## Custom methods
+The module has some of its methods that were implemented by sniffing traffic to the site<br>
+### Search
+```js
+shiki.utils.search("k-on").then((res) => {
+	// return a list of animes by this name
+});
+```
