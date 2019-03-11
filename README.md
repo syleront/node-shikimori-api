@@ -1,4 +1,5 @@
-**node-shikimori-api** - Why? Because.
+# node-shikimori-api - Why? Because.
+• [Документация на русском](https://github.com/syleront/node-shikimori-api/blob/master/README-RU.md)
 ## Installing
 Using npm
 ```cmd
@@ -32,7 +33,7 @@ shiki.auth.login({
   nickname: "zerotwo",
   password: "qwerty123"
 }).then(() => {
-  shiki.api.users({
+  shiki.api.users({ // request to https://shikimori.org/api/users/whoami
     section: "whoami"
   }).then((res) => {
     // returns logged user info
@@ -43,8 +44,8 @@ shiki.auth.login({
 ```
 
 ### Address paths
-Shikimori users some parameters in url paths
-How to get them? e.g. if you wanna to get ../users/zerotwo/history
+Shikimori users some parameters in url paths (e.g. user id)
+How to get them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)
 You must to do this next:
 
 ``` js
