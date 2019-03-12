@@ -1,5 +1,11 @@
+## v0.4.0
+* Added history date marks util
+* Support types and kinds for search util
+* Edited error messages
+* Small fixes
+
 ## v0.3.0
-* Added relogin when access_token is out of date
+* Added relogin when access_token is outdated
 * Moved utils from api to shikimori constructor
 * Added id parsing to search method in utils
 * Added docs for utils

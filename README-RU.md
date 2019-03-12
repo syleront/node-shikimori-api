@@ -1,10 +1,10 @@
 # node-shikimori-api - Зачем? Надо.
 ## Установка
-Через npm
+Через **npm**
 ```cmd
 npm i node-shikimori-api
 ```
-Через yarn
+Через **yarn**
 ```cmd
 yarn add node-shikimori-api
 ```
@@ -77,7 +77,58 @@ shiki.api.messages({
 В модуле также реализованы кастомные методы, путем отслеживания запросов на сайте<br>
 ### Поиск тайтлов
 ```js
-shiki.utils.search("k-on").then((res) => {
-	// return a list of animes by this name
+shiki.utils.search({
+  query: "k-on",
+  type: "animes" // установлено по умолчанию
+}).then((res) => {
+	// возвращает список тайтлов по запросу
 });
 ```
+Доступные параметры для поля **type**: animes, mangas, ranobe, characters, people, users<br>
+Также, тип "people" может принимать параметр **kind**, который может иметь следующие значения: seyu, producer, mangaka<br>
+##### Пример:
+```js
+shiki.utils.search({
+  query: "hayao",
+  type: "people",
+  kind: "producer"
+}).then((res) => {
+  // Возвращает список режиссеров по запросу
+});
+```
+
+### Mark history by days
+По умолчанию, api сайта не сортирует историю пользователей, но была написана функция, которая помечает элементы массива по дням<br>
+Это поможет вам отфильтровать/отсортировать массив.
+##### Usage:
+```js
+shiki.api.users({
+  section: "history",
+  user_id: "Syleront",
+  limit: 100
+}).then(shiki.utils.markHistory).then((r) => {
+  // дальнейший код
+})
+```
+##### Обычный ответ:
+```js
+{
+  id: 136013914,
+  created_at: "2019-03-12T18:37:35.621+03:00",
+  description: "Просмотрены 2-й и 3-й эпизоды",
+  target: {} //...
+}
+```
+
+##### Помеченный:
+```js
+{
+  id: 136013914,
+  created_at: "2019-03-12T18:37:35.621+03:00",
+  day_mark: "today", // этот параметр
+  day_mark_ru: "Сегодня", // и этот
+  description: "Просмотрены 2-й и 3-й эпизоды",
+  target: {} //...
+}
+```
+**day_mark** может иметь следующие значения: today, yesterday, weekly, other

@@ -1,6 +1,6 @@
 {
   "name": "node-shikimori-api",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Lightweight and easy to use wrapper for shikimori api",
   "main": "lib/index.js",
   "directories": {
@@ -12,8 +12,9 @@
   },
   "keywords": [
     "shikimori",
+    "api",
     "wrapper",
-    "api"
+    "sdk"
   ],
   "author": "Syleront",
   "license": "ISC",

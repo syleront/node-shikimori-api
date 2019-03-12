@@ -1,11 +1,11 @@
 # node-shikimori-api - Why? Because.
 • [Документация на русском](https://github.com/syleront/node-shikimori-api/blob/master/README-RU.md)
 ## Installing
-Using npm
+Using **npm**
 ```cmd
 npm i node-shikimori-api
 ```
-Using yarn
+Using **yarn**
 ```cmd
 yarn add node-shikimori-api
 ```
@@ -44,10 +44,9 @@ shiki.auth.login({
 ```
 
 ### Address paths
-Shikimori users some parameters in url paths (e.g. user id)<br>
-How to get them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)<br>
-You must to do this next:
-
+Shikimori takes some parameters in url paths (e.g. user id)<br>
+How to transfer them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)<br>
+You should do this:
 ``` js
 shiki.api.users({
   section: "history",
@@ -59,7 +58,6 @@ shiki.api.users({
 
 Also, if method must be a POST instead of GET (e.g. messages for send message)<br>
 You should set "method" parameter:
-
 ```js
 shiki.api.messages({
   method: "post",
@@ -82,7 +80,58 @@ And removes it from request parameters
 The module has some of its methods that were implemented by sniffing traffic to the site<br>
 ### Search
 ```js
-shiki.utils.search("k-on").then((res) => {
-	// return a list of animes by this name
+shiki.utils.search({
+  query: "k-on",
+  type: "animes" // sets by default
+}).then((res) => {
+  // return a list of animes by this name
 });
 ```
+Available **types**: animes, mangas, ranobe, characters, people, users<br>
+Also, "people" type may take **kind** params: seyu, producer, mangaka<br>
+##### Example:
+```js
+shiki.utils.search({
+  query: "hayao",
+  type: "people",
+  kind: "producer"
+}).then((res) => {
+  // return a list of producers by query
+});
+```
+
+### Mark history by days
+By default shikimori api doesn't sort your history in response, but I writed a function for mark response by days<br>
+This will help you filter the response array.
+##### Usage:
+```js
+shiki.api.users({
+  section: "history",
+  user_id: "Syleront",
+  limit: 100
+}).then(shiki.utils.markHistory).then((r) => {
+  // some code
+})
+```
+##### Default response:
+```js
+{
+  id: 136013914,
+  created_at: "2019-03-12T18:37:35.621+03:00",
+  description: "Просмотрены 2-й и 3-й эпизоды",
+  target: {} //...
+}
+```
+
+##### Marked response:
+```js
+{
+  id: 136013914,
+  created_at: "2019-03-12T18:37:35.621+03:00",
+  day_mark: "today", // this one
+  day_mark_ru: "Сегодня", // and this
+  description: "Просмотрены 2-й и 3-й эпизоды",
+  target: {} //...
+}
+```
+**day_mark** may have next values: today, yesterday, weekly, other
