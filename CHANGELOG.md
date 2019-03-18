@@ -1,3 +1,8 @@
+## v0.4.1
+* Support PUT, PATCH, DELETE and OPTIONS methods
+* Support api v2
+* Some fixes and changes
+
 ## v0.4.0
 * Added history date marks util
 * Support types and kinds for search util

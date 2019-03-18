@@ -50,7 +50,7 @@ shiki.auth.login({
 ``` js
 shiki.api.users({
   section: "history",
-  user_id: "zerotwo" // также можно использовать anime_id вместо user_id
+  user_id: "zerotwo" // также можно испольозвать anime_id или id вместо user_id
 }).then((res) => {
   // дальнейший код
 });
@@ -72,6 +72,24 @@ shiki.api.messages({
   // дальнейший код
 });
 ```
+
+### Использование V2 api
+```js
+shiki.api.user_rates({
+  v: 2, // установить этот параметр
+  id: 59278511,
+  method: "patch",
+  user_rate: {
+    episodes: 1
+  }
+}).then((r) => {
+  console.log();
+}).catch(console.log);
+```
+
+Параметры для запроса и самого апи передаются в один объект<br>
+Внутри, скрипт проверяет есть ли следующие параметры: **method**, **user_id**, **anime_id**, **id**, **v** <br>
+И если они есть, то он их забирает и обрабатывает, а остальное передается как query параметры для get запроса, или body для post/put/patch/delete/options запросов<br>
 
 ## Кастомные методы
 В модуле также реализованы кастомные методы, путем отслеживания запросов на сайте<br>

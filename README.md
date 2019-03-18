@@ -47,10 +47,10 @@ shiki.auth.login({
 Shikimori takes some parameters in url paths (e.g. user id)<br>
 How to transfer them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)<br>
 You should do this:
-``` js
+```js
 shiki.api.users({
   section: "history",
-  user_id: "zerotwo" // You can also use anime_id instead of user_id
+  user_id: "zerotwo" // You can also use anime_id or id instead of user_id
 }).then((res) => {
   // some code
 });
@@ -72,8 +72,22 @@ shiki.api.messages({
 });
 ```
 
+### V2 api support
+```js
+shiki.api.user_rates({
+  v: 2, // set this parameter for v2 api
+  id: 59278511,
+  method: "patch",
+  user_rate: {
+    episodes: 1
+  }
+}).then((r) => {
+  console.log();
+}).catch(console.log);
+```
+
 Parameters for request is merged with wrapper parameters <br>
-In deep, he's get next parameters if exists: **method**, **user_id**, **anime_id** <br>
+In deep, he's get next parameters if exists: **method**, **user_id**, **anime_id**, **id**, **v** <br>
 And removes it from request parameters
 
 ## Custom methods
