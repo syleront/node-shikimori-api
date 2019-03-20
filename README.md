@@ -44,9 +44,9 @@ shiki.auth.login({
 ```
 
 ### Address paths
-Shikimori takes some parameters in url paths (e.g. user id)<br>
-How to transfer them? e.g. if you wanna to get ../api/users/zerotwo/history (https://shikimori.org/api/doc/1.0/users/history)<br>
-You should do this:
+Shikimori uses some parts of the address as parameters (for example, user id) <br>
+How to transfer them? Suppose we need to make a request to ../api/users/zerotwo/history, where zerotwo is the user id (https://shikimori.org/api/doc/1.0/users/history)<br>
+To do this, do the following:
 ```js
 shiki.api.users({
   section: "history",
@@ -56,8 +56,8 @@ shiki.api.users({
 });
 ```
 
-Also, if method must be a POST instead of GET (e.g. messages for send message)<br>
-You should set "method" parameter:
+Also, if the method should be sent POST request instead of GET (for example, to send a message) <br>
+To do this, use the parameter "method"
 ```js
 shiki.api.messages({
   method: "post",
@@ -82,8 +82,8 @@ shiki.api.user_rates({
     episodes: 1
   }
 }).then((r) => {
-  console.log();
-}).catch(console.log);
+  // some code
+});
 ```
 
 Parameters for request is merged with wrapper parameters <br>
@@ -91,7 +91,7 @@ In deep, he's get next parameters if exists: **method**, **user_id**, **anime_id
 And removes it from request parameters
 
 ## Custom methods
-The module has some of its methods that were implemented by sniffing traffic to the site<br>
+The module has some of its methods that were implemented by parsing and sniffing traffic to the site<br>
 ### Search
 ```js
 shiki.utils.search({
@@ -115,8 +115,8 @@ shiki.utils.search({
 ```
 
 ### Mark history by days
-By default shikimori api doesn't sort your history in response, but I writed a function for mark response by days<br>
-This will help you filter the response array.
+By default, the site's api does not sort the user history, but a function was written that marks array elements by day <br>
+This will help you filter/sort the array.
 ##### Usage:
 ```js
 shiki.api.users({
@@ -149,3 +149,142 @@ shiki.api.users({
 }
 ```
 **day_mark** may have next values: today, yesterday, weekly, other
+
+### Getting the list of episodes
+```js
+shiki.utils.listEpisodes({
+  id: 10568 // title id
+}).then((r) => {
+  // some code
+}).catch((err) => {
+  // handling error
+});
+```
+##### Returns the following:
+```js
+[
+  {
+    "number": 1, // episode number
+    "kinds": [   // available variants
+      "озвучка",
+      "субтитры",
+      "оригинал"
+    ],
+    "hostings": [  // available hostings
+      "vk",
+      "smotretanime",
+      "sibnet",
+      "animedia"
+    ]
+  },
+  ...
+]
+```
+
+### Getting a list of sources for the episode
+```js
+shiki.utils.listEpisodeSources({
+  id: 10568,
+  number: 1 // episode number
+}).then((r) => {
+  // some code
+}).catch((err) => {
+  // handle error
+});
+```
+##### Returns the following:
+```js
+[
+  {
+    "type": "fandub", // translation type
+    "items": [ // list of available sources
+      {
+        "author": "AniDUB (Inspector_Gadjet & Murder princess)",
+        "video_id": 1819852, // video id on site
+        "hosting": "vk.com",
+        "is_bluray": true // if the video is a blue-ray rip
+      },
+      
+    ]
+  },
+  ...
+  {
+    "type": "subtitles",
+    "items": [
+      {
+        "author": "Dreamers Team",
+        "video_id": 650888,
+        "hosting": "vk.com",
+        "is_bluray": false
+      },
+    ]
+  },
+  ...
+  {
+    "type": "raw",
+    "items": [
+      {
+        "author": "Yousei-raws",
+        "video_id": 1122925,
+        "hosting": "smotretanime.ru",
+        "is_bluray": true
+      }
+    ]
+  },
+  ...
+]
+```
+
+### Getting a link to the embedded player
+```js
+shiki.utils.parseIframeLink({
+  id: 10568,
+  number: 1,
+  video_id: 1819852 // video_id from the previous request
+}).then((r) => {
+  // some code
+}).catch((err) => {
+  // handle error
+});
+```
+##### Returns url:
+```
+https://vk.com/video_ext.php?oid=-64282268&id=171402167&hash=49e1cb0e49ee4931
+```
+
+### Getting a direct link to the video
+The module also implemented popular source parsers for Shikimori: vk, smortetanime and sibnet <br>
+Using the previous method, we get a link to the embedded player, then pass it to the function:
+
+```js
+shiki.utils.getIframeSources("https://vk.com/video_ext.php?oid=-64282268&id=171402167&hash=49e1cb0e49ee4931").then((r) => {
+  // some code
+}).catch((err) => {
+  // handle error
+});
+```
+
+##### Returns the following:
+```js
+{
+  "sources": [
+    {
+      "is_divided": false, // true, if the video is divided into several sources
+      "quality": "240",
+      "url": "https://cs541109.vkuservideo.net/3/u285764482/videos/58e62834e4.240.mp4?extra=IU5mjjiJtzXGg19ZJ31TfMh1J7ctHlDreHdi1KusIMt3T1swuIFAi8mrgkernRqs5SJVf7AZTgo3ur7VmyWp38jcQq5nsJGIPm3eO8xc36cpNuy1PApOy6qprF6fDbPC-3aC4gI"
+    },
+    {
+      "is_divided": false,
+      "quality": "360",
+      "url": "https://cs541109.vkuservideo.net/3/u285764482/videos/58e62834e4.360.mp4?extra=IU5mjjiJtzXGg19ZJ31TfMh1J7ctHlDreHdi1KusIMt3T1swuIFAi8mrgkernRqs5SJVf7AZTgo3ur7VmyWp38jcQq5nsJGIPm3eO8xc36cpNuy1PApOy6qprF6fDbPC-3aC4gI"
+    },
+    ...
+  ],
+  "subtitles": null,
+  "title": "[ABD] Kamisama no Memo-chou / Блокнот Бога [09 из 12] Inspector_Gadjet &amp; Murder_Princess"
+}
+```
+Returned answers may differ, due to the fact that each resource in its own way implements playback<br>
+The **url** field can also contain an array containing links to one episode (for example, half is on one link, and the other half is on the other), this only applies to the smotretanime service, it also returns a link to the subtitles, because they are not protected in the video itself, but go separately.<br>
+
+Also, there is another problem with sibnet: when directly going to the source, it returns a 403 error. This happens because it needs to send the Referer header when connected, so the response along with the rest of the parameters also includes the headers field used to get a direct link.

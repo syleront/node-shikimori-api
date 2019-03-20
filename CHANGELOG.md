@@ -1,3 +1,9 @@
+## v1.0.0
+* Added parsing methods for getting a list of episodes, a list of sources, and getting direct links from the following sources: vk, smotretanime, sibnet
+* Added abuse_requests method in method list
+* Some fixes, changes and refactor
+* And I do not know what else can be realized, if you have ideas, suggest them: D
+
 ## v0.4.1
 * Support PUT, PATCH, DELETE and OPTIONS methods
 * Support api v2
