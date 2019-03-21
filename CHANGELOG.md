@@ -1,3 +1,6 @@
+## v1.0.0-rc.1
+* Smotretanime source parser fix
+
 ## v1.0.0
 * Added parsing methods for getting a list of episodes, a list of sources, and getting direct links from the following sources: vk, smotretanime, sibnet
 * Added abuse_requests method in method list
