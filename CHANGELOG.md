@@ -1,3 +1,6 @@
+## v1.1.1
+* Revert some changes for compatibility
+
 ## v1.1.0
 * Removed deprecated source parsers
 * Changed domain to shikimori.one
