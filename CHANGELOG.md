@@ -1,3 +1,8 @@
+## v1.1.0
+* Removed deprecated source parsers
+* Changed domain to shikimori.one
+* Some refactor
+
 ## v1.0.0-rc.1
 * Smotretanime source parser fix
 
