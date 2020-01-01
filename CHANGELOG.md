@@ -1,3 +1,6 @@
+## v1.1.2
+* Detecting fake 404 page in getTitleAwards method
+
 ## v1.1.1
 * Revert some changes for compatibility
 
